@@ -231,8 +231,16 @@ export default {
   /**
    * Rule: checks if the value is only alpha numeric
    */
-  number: function ({ value }) {
-    return Promise.resolve(!isNaN(value))
+  number: function ({ value }, type) {
+    return Promise.resolve((() => {
+      if(type && type === 'integer') {
+        return Number.isInteger(value);
+      } else if(type && type === 'float') {
+        return !Number.isInteger(value);
+      } else {
+        return Promise.resolve(!isNaN(value));
+      }
+    }))
   },
 
   /**
