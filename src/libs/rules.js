@@ -237,6 +237,9 @@ export default {
         if(type == 'integer'){
           return value % 1 === 0;
         } else if (type == 'float'){
+          if(value % 1 === 0 && value.includes('.0')){
+            return true;
+          }
           return value % 1 !== 0;
         }
       }
