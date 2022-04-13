@@ -233,19 +233,19 @@ export default {
    */
   number: function ({ value }, type) {
     return Promise.resolve((() => {
-      if(typeof type == 'string'){
-        if(type == 'integer'){
-          return value % 1 === 0;
-        } else if (type == 'float'){
-          if(value % 1 === 0 && value.includes('.0')){
-            return true;
+      if (typeof type === 'string') {
+        if (type === 'integer') {
+          return value % 1 === 0
+        } else if (type === 'float') {
+          if (value % 1 === 0 && value.includes('.0')) {
+            return true
           }
-          return value % 1 !== 0;
+          return value % 1 !== 0
         }
       }
-    return !isNaN(value)
-  })())
-},
+      return !isNaN(value)
+    })())
+  },
 
   /**
    * Rule: must be a value - allows for an optional argument "whitespace" with a possible value 'trim' and default 'pre'.
