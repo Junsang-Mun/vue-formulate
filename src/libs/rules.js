@@ -229,19 +229,20 @@ export default {
   },
 
   /**
-   * Rule: checks if the value is only alpha numeric
+   * Rule: checks if the value is numeric or intger or float
    */
   number: function ({ value }, type) {
     return Promise.resolve((() => {
-      if(type && type === 'integer') {
-        return Number.isInteger(value);
-      } else if(type && type === 'float') {
-        return !Number.isInteger(value);
-      } else {
-        return Promise.resolve(!isNaN(value));
+      if(typeof type == 'string'){
+        if(type == 'integer'){
+          return value % 1 === 0;
+        } else if (type == 'float'){
+          return value % 1 !== 0;
+        }
       }
-    }))
-  },
+    return !isNaN(value)
+  })())
+},
 
   /**
    * Rule: must be a value - allows for an optional argument "whitespace" with a possible value 'trim' and default 'pre'.
